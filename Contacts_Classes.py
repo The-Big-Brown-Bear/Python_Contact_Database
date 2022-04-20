@@ -90,7 +90,8 @@ class Contact_Consol():
     # Function: view_yearly_summary()
     # Purpos: calculates a data sumery to print to screen
     # Peramaters: contacts => the local linked list to be summariesd
-    def view (self, contacts):
+    def view (self, contact_obj):
+        contacts = contact_obj.get_CONTACTS()
         number = self.get_contact_number(contacts)
 
         if number >= 1:
@@ -118,7 +119,7 @@ class Contact_Consol():
                 return number
 
     
-    def add(self):
+    def add(self, contact_obj):
         name = input("Name: ")
         email = input("Email: ")
         phone = input("Phone: ")
@@ -131,12 +132,13 @@ class Contact_Consol():
 
         print (f"{contact[0]} was added.")
         print ()
-        return contact
+        contact_obj.set_CONTACTS(contact)
 
     
-    def delete(self, contacts):
-        number = self.get_contact_number(contacts)
-        if number > 0:
-            contact = contacts.pop(number-1)
-            print(f"{contact[0]} was deleted.\n")
-        self.write_file(contacts)
+    def delete(self, contact_obj):
+        contacts = contact_obj.get_CONTACTS()
+        num = self.get_contact_number(contacts) - 1
+        print(f"{contacts[num]} was deleted.\n")
+        contact_obj.remove_CONTACTS(num)
+        
+        

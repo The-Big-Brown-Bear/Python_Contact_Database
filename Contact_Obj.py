@@ -19,6 +19,12 @@ class Contacts_Obj ():
         self.CONTACTS.append(new_contact)
         self.write_file(self.CONTACTS)
 
+    
+    def remove_CONTACTS (self,num):
+        if num >= 0:
+            contact = self.CONTACTS.pop(num)
+            self.write_file(self.CONTACTS)
+
 
     # Function: read_file()
     # Purpos: gets the data from the csv file
