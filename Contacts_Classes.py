@@ -58,7 +58,7 @@ class Contact_Consol():
     # Function: view_yearly_summary()
     # Purpos: calculates a data sumery to print to screen
     # Peramaters: contacts => the local linked list to be summariesd
-    def  view(self, contacts):
+    def view (self, contacts):
         number = self.get_contact_number(contacts)
 
         if number == 0:
