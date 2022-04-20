@@ -54,14 +54,14 @@ def main ():
 
     while True: # run forever
         command = input("Command: ") # get user input
-        if command == "lsit":
+        if command == "list":
             contact_list.display(contacts) # if this comand do that
         elif command == "view":
             contact_list.view(contacts)  # if this comand do that
         elif command == "add":
             contact_list.add(contacts) # if this comand do that
         elif command == "del":
-            contact_list.delete(contacts)
+            contact_list.delete(contacts) # if this command do that
         elif command == "exit":
             break # if this comand do that
         else:

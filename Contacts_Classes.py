@@ -50,8 +50,9 @@ class Contact_Consol():
     # Purpos: prints the linked list line by line to console
     # Peramaters: contacts => the local linke list to be printed
     def display(self, contacts):
+        print ("Name\t-\tEmail\t-\tPhone") # creat list header
         for row in contacts: # for each row in the list
-            print(f"{row[0]} - {row[1]} - {row[2]}") # print it
+            print(f"{row[0]}\t-\t{row[1]}\t-\t{row[2]}") # print it
         print() # print a blank line
 
 
@@ -61,7 +62,7 @@ class Contact_Consol():
     def view (self, contacts):
         number = self.get_contact_number(contacts)
 
-        if number == 0:
+        if number >= 1:
             contact = contacts[number-1]
             print("Name:", contact[0])
             print("Email:", contact[1])
@@ -96,7 +97,7 @@ class Contact_Consol():
         contact.append(email)
         contact.append(phone)
         contacts.append(contact)
-        self.write_contacts(contacts)
+        self.write_file(contacts)
 
         print (f"{contact[0]} was added.")
         print ()
@@ -107,4 +108,4 @@ class Contact_Consol():
         if number > 0:
             contact = contacts.pop(number-1)
             print(f"{contact[0]} was deleted.\n")
-        self.write_contacts(contacts)
+        self.write_file(contacts)
