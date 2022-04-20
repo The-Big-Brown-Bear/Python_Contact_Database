@@ -76,7 +76,7 @@ class Contact_Consol():
     # Function: display_title()
     # Description: print the program tital to consol
     # Perameters: None
-    def display_title():
+    def display_title(self):
         print("Benjamin Boden's Contact Database") # Tital
         print() # print new line
 
@@ -84,7 +84,7 @@ class Contact_Consol():
     # Function display_menu()
     # Description: prints the comand menu to screen
     # Perameters: None
-    def display_menu():
+    def display_menu(self):
         print('''COMMAND MENU
 
                 list - Display all contacts
