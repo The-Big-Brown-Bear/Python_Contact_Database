@@ -15,10 +15,10 @@
 import csv # get csv tools
 
 
-# Class: Contact_Consol
+# Class: Monthly_Sales
 # Purpos: gets and munipulates all the csv data for user
 # Perameters: path => the location of the text file
-class Contact_Consol():
+class Monthly_Sales():
     PATHNAME:str # text file location
 
     def __init__(self, path):
