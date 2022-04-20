@@ -13,6 +13,7 @@
 
 
 import csv # get csv tools
+import sys
 
 
 # Class: Contact_Consol
@@ -23,8 +24,34 @@ class Contact_Consol():
 
     def __init__(self, path):
         self.PATHNAME = path # sets the path name for the object
-    
+        self.consol_loop()
 
+    
+    def consol_loop (self):
+        contacts = []
+        
+        contacts = self.read_file() # get the csv contents
+
+        self.display_title() # print tital
+        self.display_menu() # print menu
+
+        while True: # run forever
+            command = input("Command: ") # get user input
+            if command == "list":
+                self.display(contacts) # if this comand do that
+            elif command == "view":
+                self.view(contacts)  # if this comand do that
+            elif command == "add":
+                self.add(contacts) # if this comand do that
+            elif command == "del":
+                self.delete(contacts) # if this command do that
+            elif command == "exit":
+                print("Bye!") # print end message
+                sys.exit() # if this comand do that
+            else:
+                print("Not a valid command. Please try again.\contacts") # or have them try again
+
+    
     # Function: read_file()
     # Purpos: gets the data from the csv file
     # purameters: self => the instanc object
@@ -44,6 +71,28 @@ class Contact_Consol():
         with open(self.PATHNAME, "w", newline="") as file: # opens a IO conection to RAM
             writer = csv.writer(file) # gets it usable
             writer.writerows(contacts) # saves linked list to the CSV
+
+
+    # Function: display_title()
+    # Description: print the program tital to consol
+    # Perameters: None
+    def display_title():
+        print("Benjamin Boden's Contact Database") # Tital
+        print() # print new line
+
+
+    # Function display_menu()
+    # Description: prints the comand menu to screen
+    # Perameters: None
+    def display_menu():
+        print('''COMMAND MENU
+
+                list - Display all contacts
+                view - View a contact
+                add - Add a contact
+                del - Delete a contact
+                exit - Exit program''') # print the menu witht this formating
+        print() # new line
 
 
     # Function: display()
