@@ -45,7 +45,7 @@ def display_menu():
 def main ():
     comtacts = [] # declare variable
 
-    contact_list = CC.Monthly_Sales(FILENAME) # creat new object
+    contact_list = CC.Contact_Consol(FILENAME) # creat new object
 
     display_title() # print tital
     display_menu() # print menu
