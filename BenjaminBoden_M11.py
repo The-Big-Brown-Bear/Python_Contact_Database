@@ -12,7 +12,7 @@
     if I am found in violation of this policy.'''
 
 
-import Contacts_Classes as CC # import my monthly comtacts module
+import Contacts_Classes as CC # import my monthly contacts module
 
 FILENAME = "MO11_Project\contacts.csv" # declare the file path constant
 
@@ -43,29 +43,29 @@ def display_menu():
 # Description: main program function
 # Peramiters: None
 def main ():
-    comtacts = [] # declare variable
+    contacts = [] # declare variable
 
     contact_list = CC.Contact_Consol(FILENAME) # creat new object
 
     display_title() # print tital
     display_menu() # print menu
     
-    comtacts = contact_list.read_file() # get the csv contents
+    contacts = contact_list.read_file() # get the csv contents
 
     while True: # run forever
         command = input("Command: ") # get user input
         if command == "lsit":
-         contact_list.view_monthly_sales(comtacts) # if this comand do that
+            contact_list.display(contacts) # if this comand do that
         elif command == "view":
-         contact_list.view_yearly_summary(comtacts)  # if this comand do that
+            contact_list.view(contacts)  # if this comand do that
         elif command == "add":
-         contact_list.edit(comtacts) # if this comand do that
+            contact_list.add(contacts) # if this comand do that
         elif command == "del":
-            pass
+            contact_list.delete(contacts)
         elif command == "exit":
             break # if this comand do that
         else:
-            print("Not a valid command. Please try again.\n") # or have them try again
+            print("Not a valid command. Please try again.\contacts") # or have them try again
     
     print("Bye!") # print end message
 
