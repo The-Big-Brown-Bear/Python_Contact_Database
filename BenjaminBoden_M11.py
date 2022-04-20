@@ -12,7 +12,7 @@
     if I am found in violation of this policy.'''
 
 
-import Monthly_Sales_class as MS # import my monthly comtacts module
+import Contacts_Classes as CC # import my monthly comtacts module
 
 FILENAME = "MO11_Project\contacts.csv" # declare the file path constant
 
@@ -45,7 +45,7 @@ def display_menu():
 def main ():
     comtacts = [] # declare variable
 
-    contact_list = MS.Monthly_Sales(FILENAME) # creat new object
+    contact_list = CC.Monthly_Sales(FILENAME) # creat new object
 
     display_title() # print tital
     display_menu() # print menu
