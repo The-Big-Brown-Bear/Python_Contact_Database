@@ -15,10 +15,10 @@
 import csv # get csv tools
 
 
-# Class: Monthly_Sales
+# Class: Contact_Consol
 # Purpos: gets and munipulates all the csv data for user
 # Perameters: path => the location of the text file
-class Monthly_Sales():
+class Contact_Consol():
     PATHNAME:str # text file location
 
     def __init__(self, path):
@@ -39,84 +39,72 @@ class Monthly_Sales():
 
     # Function: write_file()
     # purpos: saves data to the CSV file
-    # Peramaters: sales => the local linked list to be saved as a CSV
-    def write_file(self, sales):
+    # Peramaters: contacts => the local linked list to be saved as a CSV
+    def write_file(self, contacts):
         with open(self.PATHNAME, "w", newline="") as file: # opens a IO conection to RAM
             writer = csv.writer(file) # gets it usable
-            writer.writerows(sales) # saves linked list to the CSV
+            writer.writerows(contacts) # saves linked list to the CSV
 
 
-    # Function: view_monthly_sales()
+    # Function: display()
     # Purpos: prints the linked list line by line to console
-    # Peramaters: sales => the local linke list to be printed
-    def view_monthly_sales(self, sales):
-        for row in sales: # for each row in the list
-            print(f"{row[0]} - {row[1]}") # print it
-        print() # print a blaink line
+    # Peramaters: contacts => the local linke list to be printed
+    def display(self, contacts):
+        for row in contacts: # for each row in the list
+            print(f"{row[0]} - {row[1]} - {row[2]}") # print it
+        print() # print a blank line
 
 
     # Function: view_yearly_summary()
     # Purpos: calculates a data sumery to print to screen
-    # Peramaters: sales => the local linked list to be summariesd
-    def  view_yearly_summary(self, sales):
-        total = 0 # declare varialbe
-        for row in sales: # for each row
-            amount = int(row[1]) # get the value stored at the end of the row
-            total += amount # add to total
+    # Peramaters: contacts => the local linked list to be summariesd
+    def  view(self, contacts):
+        number = self.get_contact_number(contacts)
 
-        # get count
-        count = len(sales)
-        
-        # calculate average
-        average = total / count
-        average = round(average, 2) # round that answer
-
-        # format and display the result
-        print("Yearly total:    ", total) # result
-        print("Monthly average: ", average) # result 
-        print() # print new line
+        if number == 0:
+            contact = contacts[number-1]
+            print("Name:", contact[0])
+            print("Email:", contact[1])
+            print("Phone:", contact[2])
+            print() 
+        else:
+            pass
 
 
-    # Function: edit()
-    # Purpos: changes one of the months values acording to user input and saves it to the CSV
-    # Perameters: sales => the local linke list to be changend
-    def edit(self,sales):
-        names = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'] # sets the lis of months
+    def get_contact_number(self, contacts):
+        while True:
+            try:
+                number = int(input("Number: "))
+            except ValueError:
+                print("Invalid integer.\n")
+                return -1
+                
+            if number < 1 or number > len(contacts):
+                print("Invalid contact number.\n")
+                return -1
+            else:
+                return number
 
-        l = "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" # creats a long string
+    
+    def add(self, contacts):
+        name = input("Name: ")
+        email = input("Email: ")
+        phone = input("Phone: ")
 
-        print("Months: "+l) # print that long string
+        contact = []
+        contact.append(name)
+        contact.append(email)
+        contact.append(phone)
+        contacts.append(contact)
+        self.write_contacts(contacts)
 
-        valid = False # declare variable
+        print (f"{contact[0]} was added.")
+        print ()
 
-        while valid != True: # infinet loop
-            name = input("What month?\t") # get user input
-            if name.lower() == 'jan': valid = True # right month? break loop
-            elif name.lower() == 'feb': valid = True # right month? break loop
-            elif name.lower() == 'mar': valid = True # right month? break loop
-            elif name.lower() == 'apr': valid = True # right month? break loop
-            elif name.lower() == names[4].lower(): valid = True # right month? break loop
-            elif name.lower() == names[5].lower(): valid = True # right month? break loop
-            elif name.lower() == names[6].lower(): valid = True # right month? break loop
-            elif name.lower() == names[7].lower(): valid = True # right month? break loop # right month? break loop
-            elif name.lower() == names[8].lower(): valid = True # right month? break loop
-            elif name.lower() == names[9].lower(): valid = True # right month? break loop
-            elif name.lower() == names[10].lower(): valid = True # right month? break loop
-            elif name.lower() == names[11].lower(): valid = True # right month? break loop
-            else: # otherwise get user to corect
-                print("Invalid three-letter month.") # print line
-                print("Pleas print one of these: \n\t"+l) # print line
-
-        index_of = names.index(name.lower()) # locate what month they said
-
-        amount = int(input("Sales Amount: ")) # get user input
-
-        month = [] # declare list
-
-        month.append(name) # add the mothe to end of list
-        month.append(str(amount)) # add the user input to end of list
-        sales[index_of] = month # save that list to the location of the big list
-
-        self.write_file(sales) # save list to CSV
-        print(f"Sales amount for {month[0]} was modified.") # print to consol
-        print() # print new line
+    
+    def delete(self, contacts):
+        number = self.get_contact_number(contacts)
+        if number > 0:
+            contact = contacts.pop(number-1)
+            print(f"{contact[0]} was deleted.\n")
+        self.write_contacts(contacts)
