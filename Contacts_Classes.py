@@ -14,51 +14,25 @@
 
 import csv # get csv tools
 import sys
-
-
-class Contacts_Obj ():
-    PATHNAME:str # text file location
-
-    def __init__(self, path):
-        self.PATHNAME = path # sets the path name for the object
-
-    # Function: read_file()
-    # Purpos: gets the data from the csv file
-    # purameters: self => the instanc object
-    def read_file(self):
-        data = [] # declare variable
-        with open(self.PATHNAME, newline="") as file: # opens the csv to RAM
-            reader = csv.reader(file) # gets the data
-            for row in reader: # for every row in the file
-                data.append(row) # save it to a local linked list
-        return data # return this list
-    
-
-    # Function: write_file()
-    # purpos: saves data to the CSV file
-    # Peramaters: contacts => the local linked list to be saved as a CSV
-    def write_file(self, contacts):
-        with open(self.PATHNAME, "w", newline="") as file: # opens a IO conection to RAM
-            writer = csv.writer(file) # gets it usable
-            writer.writerows(contacts) # saves linked list to the CSV
-
-
+import Contact_Obj as CO
 
 # Class: Contact_Consol
 # Purpos: gets and munipulates all the csv data for user
 # Perameters: path => the location of the text file
 class Contact_Consol():
     PATHNAME:str # text file location
+    contacts:object
 
     def __init__(self, path):
         self.PATHNAME = path # sets the path name for the object
         self.consol_loop()
+        
 
     
     def consol_loop (self):
-        contacts = []
+        self.contacts = CO.Contacts_Obj(self.PATHNAME)
         
-        contacts = self.read_file() # get the csv contents
+        ###contacts = self.read_file() # get the csv contents
 
         self.display_title() # print tital
         self.display_menu() # print menu
@@ -66,13 +40,13 @@ class Contact_Consol():
         while True: # run forever
             command = input("Command: ") # get user input
             if command == "list":
-                self.display(contacts) # if this comand do that
+                self.display(self.contacts) # if this comand do that
             elif command == "view":
-                self.view(contacts)  # if this comand do that
+                self.view(self.contacts)  # if this comand do that
             elif command == "add":
-                self.add(contacts) # if this comand do that
+               self.add(self.contacts)# if this comand do that
             elif command == "del":
-                self.delete(contacts) # if this command do that
+                self.delete(self.contacts) # if this command do that
             elif command == "exit":
                 print("Bye!") # print end message
                 sys.exit() # if this comand do that
@@ -105,7 +79,8 @@ class Contact_Consol():
     # Function: display()
     # Purpos: prints the linked list line by line to console
     # Peramaters: contacts => the local linke list to be printed
-    def display(self, contacts):
+    def display(self, contact_obj):
+        contacts = contact_obj.get_CONTACTS()
         print ("Name\t-\tEmail\t-\tPhone") # creat list header
         for row in contacts: # for each row in the list
             print(f"{row[0]}\t-\t{row[1]}\t-\t{row[2]}") # print it
@@ -143,7 +118,7 @@ class Contact_Consol():
                 return number
 
     
-    def add(self, contacts):
+    def add(self):
         name = input("Name: ")
         email = input("Email: ")
         phone = input("Phone: ")
@@ -152,11 +127,11 @@ class Contact_Consol():
         contact.append(name)
         contact.append(email)
         contact.append(phone)
-        contacts.append(contact)
-        self.write_file(contacts)
+        
 
         print (f"{contact[0]} was added.")
         print ()
+        return contact
 
     
     def delete(self, contacts):
