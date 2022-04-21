@@ -1,29 +1,40 @@
-import csv
+import csv #import dependencies
 
 class Contacts_Obj ():
     PATHNAME:str # text file location
     CONTACTS:list # content of list
 
-
+    # function: __init__()
+    # job: initiats the object
+    # Peramaters: self => object, path => the file location
     def __init__(self, path):
         self.PATHNAME = path # sets the path name for the object
-        self.CONTACTS = self.read_file()
+        self.CONTACTS = self.read_file() # gets the file contents
 
 
+    # Function: get_CONTACTS()
+    # Job: returns the objects data
+    # Peramaters: self => self
     def get_CONTACTS(self):
-        data = self.CONTACTS
-        return data
+        data = self.CONTACTS # set 2D list
+        return data # return 2D list
 
     
+    # Function: set_CONTACTS()
+    # Job: sets new data to the 2D list
+    # Peramaters: self => self, new_contact => new list to be added
     def set_CONTACTS(self,new_contact):
-        self.CONTACTS.append(new_contact)
-        self.write_file(self.CONTACTS)
+        self.CONTACTS.append(new_contact) # add new list to the big 2D list
+        self.write_file(self.CONTACTS) # save data
 
     
+    # Function: remove_CONTACTS ()
+    # Job: removes data from list
+    # peramaters: self => self, num => the number entry that gets removed
     def remove_CONTACTS (self,num):
-        if num >= 0:
-            contact = self.CONTACTS.pop(num)
-            self.write_file(self.CONTACTS)
+        if num >= 0 and num <= len(self.CONTACTS): # if its in range
+            contact = self.CONTACTS.pop(num) # remove that entry
+            self.write_file(self.CONTACTS) # save to file
 
 
     # Function: read_file()
