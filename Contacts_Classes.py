@@ -53,7 +53,7 @@ class Contact_Consol():
                 print("Bye!") # print end message
                 sys.exit() # if this comand do that
             else:
-                print("Not a valid command. Please try again.\contacts") # or have them try again
+                print("Not a valid command. Please try again.") # or have them try again
 
     
     # Function: display_title()
@@ -149,7 +149,7 @@ class Contact_Consol():
         contacts = contact_obj.get_CONTACTS() # gets the 2D list from the object
         
         num = self.get_contact_number(contacts) - 1 # gets valed user input
-        print(f"{contacts[num]} was deleted.\n") # print message to user
+        print(f"{contacts[num[0]]} was deleted.\n") # print message to user
         
         contact_obj.remove_CONTACTS(num) # removes the contact from the master object
         
